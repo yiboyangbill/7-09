@@ -1,6 +1,6 @@
 display.setStatusBar(display.HiddenStatusBar)
 
-centerX = display.contentWidth * .5
+centerX = display.contentWidth * .2
 
 centerY = display.contentHeight * .5
 
@@ -15,7 +15,6 @@ local sheetOptionsIdle =
 }
 
 local sheetIdleKnight = graphics.newImageSheet( "knightIdle.png", sheetOptionsIdle )
-
 
 local sheetOptionsWalk =
 
@@ -71,6 +70,9 @@ knight.x = centerX
 
 knight.y = centerY
 
+knight.xScale = 0.3
+
+knight.yScale = 0.3
 
 knight:play()
 
@@ -83,7 +85,98 @@ local function swapSheet()
 
     print("walk")
 
+end
+
+timer.performWithDelay( 2250, swapSheet )
+
+display.setStatusBar(display.HiddenStatusBar)
+
+centerX = display.contentWidth * .8
+
+centerY = display.contentHeight * .5
+
+local sheetOptionsninja =
+
+{
+    width = 928/4,
+
+    height = 1317/3,
+
+    numFrames = 10
+}
+
+local sheetIdleninja = graphics.newImageSheet( "ninjaBoyIdle.png", sheetOptionsninja )
+
+
+local sheetOptionsRun =
+
+{
+
+    width = 928/4,
+
+    height = 1317/3,
+
+    numFrames = 10
+
+}
+
+local sheetRunningninja = graphics.newImageSheet( "ninjaBoyRun.png", sheetOptionsRun )
+
+
+local sequence_data = {
+
+    {
+        name = "ninjaBoy",
+
+        start = 1,
+
+        count = 10,
+
+        time = 800,
+
+        loopCount = 0,
+
+        sheet = sheetIdleninja
+    },
+
+    
+    {
+        name = "run",
+
+        start = 1,
+
+        count = 10,
+
+        time = 800,
+
+        loopCount = 0,
+
+        sheet = sheetRunningninja
+    }
+}
+
+
+local ninja = display.newSprite( sheetIdleninja, sequence_data )
+
+ninja.x = centerX
+
+ninja.y = centerY
+
+ninja.xScale = 0.3
+
+ninja.yScale = 0.3
+
+ninja:play()
+
+
+local function aSheet()
+
+    ninja:setSequence( "run" )
+
+    ninja:play()
+
+    print("run")
 
 end
 
-timer.performWithDelay( 2000, swapSheet )
+timer.performWithDelay( 2000, aSheet )
